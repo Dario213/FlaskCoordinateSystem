@@ -1,0 +1,62 @@
+.axis {
+    --c: 10;
+    --cx: 5;
+    --cy: 5;
+    --dsize: 10;
+    --dcolor: #369;
+    --size: 100%;
+    position: relative;
+    width: var(--size);
+    box-sizing: border-box;
+    aspect-ratio: 1/1;
+    --g: linear-gradient(#000 0 0);
+    background:
+        var(--g) 0 calc((var(--cy)/var(--c))*100%)/100% 2px no-repeat,
+        var(--g) calc((var(--cx)/var(--c))*100%) 0/2px 100% no-repeat,
+        conic-gradient(at bottom 1px right 1px, #0005 75%, #0000 0) 0 0/calc(100%/var(--c)) calc(100%/var(--c));
+
+}
+
+.axis.no-overflow {
+    overflow: hidden;
+}
+
+.dot {
+    --translationUnit: 100% / var(--c);
+    --translationX: var(--translationUnit) * var(--cx);
+    --translationY: var(--translationUnit) * var(--cy);
+    /* Vertical is "flipped" in CSS: higher values go down! Do negative! */
+    --y: calc(var(--translationY) - var(--translationUnit) * var(--function));
+    width: calc(var(--dsize) * 1px);
+    height: calc(var(--dsize) * 1px);
+    background: var(--dcolor);
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: calc(var(--translationX) + var(--x) * var(--translationUnit));
+    top: var(--y);
+}
+
+/* Demo functions */
+#axis_1_x2 {
+    --size: 350px;
+}
+
+#axis_1_x2 .dot {
+    /**
+   * f(x) = 1 / x^2
+   *        x^2 = var(--x) * var(--x)
+   */
+    --function: calc((var(--x) * var(--x)));
+}
+
+
+/* demo - display only */
+html,
+body {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+article {
+    margin: 30px;
+}
