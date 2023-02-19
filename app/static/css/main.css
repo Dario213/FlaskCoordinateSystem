@@ -44,7 +44,7 @@
 
 #axis_1_x2 .dot {
     /**
-   * f(x) = 1 / x^2
+   * f(x) = x^2
    *        x^2 = var(--x) * var(--x)
    */
     --function: calc((var(--x) * var(--x)));
